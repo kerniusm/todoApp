@@ -25,7 +25,7 @@ export class TodoComponent implements OnInit {
 
   loadTodo(){
     return this._tS.getAllTodo().subscribe(
-      todoList => { console.log(todoList); this.todoList= todoList}
+      todoList => { this.todoList= todoList}
     );
   }
 
