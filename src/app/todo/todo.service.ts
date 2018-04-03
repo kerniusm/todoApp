@@ -22,11 +22,6 @@ export class TodoService {
     return this._http.get<Todo[]>(this.todoUrl);
   }
 
-  getTodoByPriority(priority: number): Observable<Todo> {
-    const url = `${this.todoUrl}/?priority=${priority}`;
-    return this._http.get<Todo>(url);
-  }
-
   addTodo(todo: Todo): Observable<Todo> {
     return this._http.post<Todo>(this.todoUrl, todo, httpOptions);
   }
