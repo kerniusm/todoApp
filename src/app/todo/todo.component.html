@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="new-item">
+    <input class="add-item" (keydown)="submitTodo($event)" type="text" #newItem placeholder="New item">
+  </div>
+  <div class="list" *ngIf="todoList?.length > 0; else noItems">
+    <ul>
+      <li *ngFor="let item of todoList">
+          <span>{{item.name}}</span>
+          <button [disabled]="searchText" (click)="moveTo(item, 1)"><i class="material-icons">keyboard_arrow_up</i></button>
+          <button [disabled]="searchText" (click)="moveTo(item, -1)"><i class="material-icons">keyboard_arrow_down</i></button>
+          <button [disabled]="searchText" (click)="removeTodo(item)"><i class="material-icons">delete</i></button>
+          <div class="mark-check">
+            <input (change)="markAsDone(item, $event)" [checked]="item.isMarkedAsDone" type="checkbox" id="{{item.name + item.id}}">
+            <label for="{{item.name + item.id}}">
+              Done
+            </label>
+          </div>
+      </li>
+    </ul>
+  </div>
+  <ng-template #noItems>
+    <p>No Todo Items</p>
+  </ng-template>
+  <div id="search-component">
+    <input placeholder="Search" #searchBox id="search-box" class="add-item" (keyup)="search(searchBox.value)" />
+    <ul class="search-result">
+      <li *ngFor="let todo of todo$ | async" >
+          {{todo.name}}
+      </li>
+    </ul>
+  </div>
+</div>
